@@ -1,0 +1,18 @@
+{
+  "name": "Carry",
+  "short_name": "Carry",
+  "description": "A local-first daily todo list that carries unfinished tasks forward.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f8f6f1",
+  "theme_color": "#f8f6f1",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
