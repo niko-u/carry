@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   cacheElements();
   migrateDayIfNeeded();
   bindEvents();
+  bindKeyboardOffset();
   render();
   registerServiceWorker();
 });
@@ -55,6 +56,24 @@ function bindEvents() {
       render();
     });
   });
+}
+
+function bindKeyboardOffset() {
+  const viewport = window.visualViewport;
+  if (!viewport) return;
+
+  const update = () => {
+    const offset = Math.max(0, window.innerHeight - viewport.height - viewport.offsetTop);
+    document.documentElement.style.setProperty("--keyboard-offset", `${Math.round(offset)}px`);
+  };
+
+  viewport.addEventListener("resize", update);
+  viewport.addEventListener("scroll", update);
+  els.taskInput.addEventListener("focus", () => requestAnimationFrame(update));
+  els.taskInput.addEventListener("blur", () => {
+    document.documentElement.style.setProperty("--keyboard-offset", "0px");
+  });
+  update();
 }
 
 function loadState() {

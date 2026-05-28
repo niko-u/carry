@@ -10,6 +10,7 @@
   --danger: #b54848;
   --shadow: 0 18px 50px rgba(49, 43, 31, 0.12);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --keyboard-offset: 0px;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
 }
 
@@ -43,7 +44,7 @@ button {
   min-height: 100svh;
   max-width: 720px;
   margin: 0 auto;
-  padding: max(18px, env(safe-area-inset-top, 0px)) 18px calc(26px + var(--safe-bottom));
+  padding: max(18px, env(safe-area-inset-top, 0px)) 18px calc(92px + var(--safe-bottom));
 }
 
 .topbar {
@@ -252,7 +253,7 @@ h1 {
 }
 
 .empty-state {
-  margin-top: 12vh;
+  margin-top: 18vh;
   color: var(--muted);
   text-align: center;
 }
@@ -271,15 +272,22 @@ h1 {
 }
 
 .quick-add {
+  position: fixed;
+  right: 14px;
+  bottom: calc(14px + var(--safe-bottom) + var(--keyboard-offset));
+  left: 14px;
+  z-index: 5;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 50px;
   gap: 8px;
-  margin: 0 0 14px;
+  max-width: 692px;
+  margin: 0 auto;
   padding: 8px;
   border: 1px solid var(--line);
   border-radius: 24px;
   background: var(--surface);
-  box-shadow: 0 12px 34px rgba(49, 43, 31, 0.1);
+  box-shadow: var(--shadow);
+  transition: bottom 180ms ease;
 }
 
 .quick-add input {
