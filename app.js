@@ -171,6 +171,13 @@ function addTask(rawText) {
   insertBySimilarity(task.id);
   els.taskInput.value = "";
   saveAndRender();
+  returnToTop();
+}
+
+function returnToTop() {
+  requestAnimationFrame(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 }
 
 function nextOrder() {
