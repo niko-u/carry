@@ -5,9 +5,7 @@ const defaultState = {
   tasks: [],
   archivedDays: {},
   lastOpenedDate: todayKey(),
-  settings: {
-    theme: "system",
-  },
+  settings: {},
 };
 
 let state = loadState();
@@ -19,7 +17,6 @@ const els = {};
 document.addEventListener("DOMContentLoaded", () => {
   cacheElements();
   migrateDayIfNeeded();
-  applyTheme();
   bindEvents();
   render();
   registerServiceWorker();
@@ -32,8 +29,6 @@ function cacheElements() {
   els.historyList = document.querySelector("#historyList");
   els.taskForm = document.querySelector("#taskForm");
   els.taskInput = document.querySelector("#taskInput");
-  els.themeButton = document.querySelector("#themeButton");
-  els.themeIcon = document.querySelector("#themeIcon");
   els.sortButton = document.querySelector("#sortButton");
   els.tabButtons = Array.from(document.querySelectorAll(".tab-button"));
   els.views = {
@@ -48,7 +43,6 @@ function bindEvents() {
     addTask(els.taskInput.value);
   });
 
-  els.themeButton.addEventListener("click", toggleTheme);
   els.sortButton.addEventListener("click", () => {
     sortTodayTasks({ respectManualOrder: false });
     saveAndRender();
@@ -59,10 +53,6 @@ function bindEvents() {
       activeView = button.dataset.view;
       render();
     });
-  });
-
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
-    if (state.settings.theme === "system") applyTheme();
   });
 }
 
@@ -200,7 +190,6 @@ function render() {
   renderTabs();
   renderToday();
   renderHistory();
-  applyTheme();
 }
 
 function renderTabs() {
@@ -441,26 +430,6 @@ function jaccard(setA, setB) {
     if (setB.has(value)) intersection += 1;
   });
   return intersection / (setA.size + setB.size - intersection);
-}
-
-function toggleTheme() {
-  const current = resolvedTheme();
-  state.settings.theme = current === "dark" ? "light" : "dark";
-  saveAndRender();
-}
-
-function resolvedTheme() {
-  if (state.settings.theme === "system") {
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  }
-  return state.settings.theme;
-}
-
-function applyTheme() {
-  const theme = resolvedTheme();
-  document.documentElement.dataset.theme = theme;
-  document.querySelector("meta[name='theme-color']").setAttribute("content", theme === "dark" ? "#050505" : "#f8f6f1");
-  if (els.themeIcon) els.themeIcon.textContent = theme === "dark" ? "☀" : "☾";
 }
 
 function escapeHtml(value) {

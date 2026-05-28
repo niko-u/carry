@@ -13,19 +13,6 @@
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
 }
 
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --bg: #050505;
-  --surface: #111111;
-  --text: #f5f1e8;
-  --muted: #a39b8e;
-  --line: #2b2925;
-  --accent: #f1c40f;
-  --accent-strong: #ffd84f;
-  --danger: #ff8686;
-  --shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
-}
-
 * {
   box-sizing: border-box;
 }
@@ -71,18 +58,10 @@ button {
   backdrop-filter: blur(18px);
 }
 
-.eyebrow {
-  margin: 0 0 2px;
-  color: var(--muted);
-  font-size: 0.78rem;
-  font-weight: 650;
-  text-transform: uppercase;
-}
-
 h1 {
   margin: 0;
   font-size: 2rem;
-  line-height: 1;
+  line-height: 1.05;
   letter-spacing: 0;
 }
 
@@ -91,9 +70,9 @@ h1 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 6px;
-  padding: 4px;
+  padding: 5px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 999px;
   background: var(--surface);
 }
 
@@ -107,7 +86,7 @@ h1 {
 
 .tab-button {
   min-height: 38px;
-  border-radius: 6px;
+  border-radius: 999px;
   background: transparent;
   color: var(--muted);
   font-weight: 700;
@@ -130,7 +109,7 @@ h1 {
   height: 42px;
   place-items: center;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 50%;
   background: var(--surface);
   box-shadow: none;
   font-size: 1.2rem;
@@ -200,6 +179,7 @@ h1 {
   width: 40px;
   height: 40px;
   border: 0;
+  border-radius: 50%;
   background: transparent;
   color: var(--muted);
   cursor: grab;
@@ -210,6 +190,7 @@ h1 {
   width: 40px;
   height: 40px;
   border: 0;
+  border-radius: 50%;
   background: transparent;
   color: var(--danger);
   cursor: pointer;
@@ -248,7 +229,7 @@ h1 {
   margin: 0 auto;
   padding: 8px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 24px;
   background: var(--surface);
   box-shadow: var(--shadow);
 }
@@ -266,7 +247,7 @@ h1 {
 .quick-add button {
   width: 50px;
   height: 48px;
-  border-radius: 8px;
+  border-radius: 18px;
   background: var(--accent);
   color: #15120a;
   font-size: 1.7rem;
